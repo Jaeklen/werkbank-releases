@@ -1,0 +1,49 @@
+name: Discord-Meldung bei neuer Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Nachricht an Discord senden
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          ROLE: ${{ secrets.DISCORD_ROLE_ID }}
+          NAME: ${{ github.event.release.name }}
+          TAG: ${{ github.event.release.tag_name }}
+          URL: ${{ github.event.release.html_url }}
+          BODY: ${{ github.event.release.body }}
+        run: |
+          set -euo pipefail
+          if [ -z "${WEBHOOK:-}" ]; then echo "Kein DISCORD_WEBHOOK hinterlegt, nichts gesendet."; exit 0; fi
+
+          TEXT=$(printf '%s' "$BODY" | tr -d '\r' | awk '
+            BEGIN{ de=0 }
+            { lines[NR]=$0; if (toupper($0) ~ /^\[DE\][ \t]*$/) de=1 }
+            END{
+              on = (de==0)
+              for (i=1;i<=NR;i++){
+                l=lines[i]
+                if (toupper(l) ~ /^\[DE\][ \t]*$/) { on=1; continue }
+                if (toupper(l) ~ /^\[EN\][ \t]*$/) { break }
+                if (on) print l
+              }
+            }')
+          TEXT=$(printf '%s' "$TEXT" | sed -E 's/^#{1,4}[ \t]+(.*)$/**\1**/' | head -c 3500)
+          [ -n "$TEXT" ] || TEXT="Eine neue Version der POE2 Werkbank ist da."
+
+          if [ -n "${ROLE:-}" ]; then CONTENT="<@&${ROLE}> Neue Version der POE2 Werkbank!"; else CONTENT="Neue Version der POE2 Werkbank!"; fi
+
+          jq -n --arg content "$CONTENT" --arg role "${ROLE:-}" --arg title "${NAME:-$TAG}" \
+                --arg url "$URL" --arg desc "$TEXT" '
+            { content: $content,
+              allowed_mentions: { roles: (if $role == "" then [] else [$role] end) },
+              embeds: [ { title: $title, url: $url, description: $desc, color: 16744494,
+                          footer: { text: "Download über den Titel" } } ] }' \
+          | curl -fsS -H "Content-Type: application/json" --data @- "$WEBHOOK"
