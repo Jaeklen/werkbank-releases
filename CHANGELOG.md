@@ -5,6 +5,48 @@ Das Programm und der Discord-Post lesen die Marker `[DE]` und `[EN]`.
 
 ---
 
+## Build 203
+
+[DE]
+### Neu
+- Buildplaner (Windows-App): Neue Karte „Item vergleichen". Item aus dem Spiel kopieren (Strg+Alt+C), einen Platz wählen, einfügen, „Vergleichen": die Werkbank setzt das Item in deinen PoB-Build und zeigt Leben, Mana, Widerstände, effektive Lebenspunkte und Schaden vorher und nachher. Wahlweise mit Full DPS für eine Fertigkeit. Der Text muss auf Englisch sein.
+
+[EN]
+### New
+- Build planner (Windows app): new “Compare an item” card. Copy an item in the game (Ctrl+Alt+C), choose a slot, paste, “Compare”: the workbench puts the item into your PoB build and shows life, mana, resistances, effective HP and damage before and after. Optionally with Full DPS for one skill. The text has to be in English.
+
+---
+
+## Build 202
+
+[DE]
+### Neu
+- Buildplaner, Karte „Berechnung (Richtwert)": Automatische Neuberechnung. Nach der ersten Berechnung rechnet die Werkbank bei jeder Änderung im Passivbaum von selbst neu und zeigt, was sich ändert (zum Beispiel „Effektive Lebenspunkte +1.779", grün bei Gewinn, rot bei Verlust). Über dem Passivbaum steht dazu ein Kurzstreifen mit Leben, effektiven Lebenspunkten und Schaden. Abschaltbar in der Karte.
+### Verbessert
+- Buildplaner: Bei einem eingelesenen PoB-Code fließen Punkte, die du im Passivbaum änderst, jetzt in die Berechnung ein (Ausrüstung und Gems kommen weiter aus dem Code). Bereits gespeicherte Builds einmal neu einlesen.
+- Die automatische Neuberechnung ist schnell (etwa 3 Sekunden); die Liste „Schaden je Fertigkeit" bleibt dabei stehen und lässt sich per Knopf neu berechnen.
+
+[EN]
+### New
+- Build planner, “Calculation (estimate)” card: automatic recalculation. After the first calculation the workbench recalculates by itself whenever you change the passive tree and shows what changed (for example “Effective HP +1,779”, green for a gain, red for a loss). A short strip with life, effective HP and damage sits above the passive tree. Can be switched off in the card.
+### Improved
+- Build planner: with an imported PoB code, passive points you change in the tree are now included in the calculation (gear and gems still come from the code). Import already saved builds once more.
+- The automatic recalculation is quick (about 3 seconds); the “damage per skill” list stays as it was and can be recalculated with a button.
+
+---
+
+## Build 201
+
+[DE]
+### Verbessert
+- Buildplaner, Karte „Berechnung (Richtwert)": Du kannst jetzt die Hauptfertigkeit wählen, genau wie in Path of Building. Dazu gibt es eine Liste mit dem Schaden jeder einzelnen Fertigkeit, die effektiven Lebenspunkte und, wenn der Build Fertigkeiten für „Full DPS" markiert hat (oder bei einem selbst geplanten Build), den Gesamtschaden. Vorher wurde nur die erste Fertigkeit berechnet. Ein Vergleich mit einem Build von poe.ninja ergab dieselben Werte wie in Path of Building.
+
+[EN]
+### Improved
+- Build planner, “Calculation (estimate)” card: you can now choose the main skill, just like in Path of Building. There is also a list with the damage of every single skill, the effective hit points and, if the build has skills marked for “Full DPS” (or for a build you planned yourself), the total damage. Before, only the first skill was calculated. A comparison with a build from poe.ninja gave the same values as Path of Building.
+
+---
+
 ## Build 200
 
 [DE]
